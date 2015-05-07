@@ -113,6 +113,7 @@ else
     hi ModeMsg          cterm=BOLD      ctermfg=61      ctermbg=NONE
     hi MoreMsg          cterm=BOLD      ctermfg=61      ctermbg=NONE
     hi Question         cterm=BOLD      ctermfg=130     ctermbg=NONE
+    hi CursorLine       cterm=BOLD      ctermfg=NONE    ctermbg=237
 
     hi StatusLine       cterm=BOLD      ctermfg=247     ctermbg=235
     hi User1            cterm=BOLD      ctermfg=46      ctermbg=235
@@ -142,7 +143,7 @@ else
     hi Title            cterm=BOLD      ctermfg=124     ctermbg=NONE
     hi Visual           cterm=NONE      ctermfg=231     ctermbg=61
 
-    hi Comment          cterm=NONE      ctermfg=247     ctermbg=NONE
+    hi Comment          cterm=NONE      ctermfg=110     ctermbg=NONE
     hi Constant         cterm=NONE      ctermfg=215     ctermbg=NONE
     hi String           cterm=NONE      ctermfg=215     ctermbg=235
     hi Error            cterm=NONE      ctermfg=231     ctermbg=52
