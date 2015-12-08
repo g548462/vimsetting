@@ -6,6 +6,8 @@ endif
 
 execute "command! -nargs=1 Colo let g:moria_style = \"<args>\" | colo moria"
 
+let s:moria_style = 'dark'
+
 if s:moria_style == 'dark'
     set background=dark
 elseif s:moria_style == 'light'
@@ -21,6 +23,7 @@ if exists("syntax_on")
 endif
 
 let colors_name = "moria"
+
 
 if s:moria_style == "dark"
     hi Normal ctermbg=0 ctermfg=7 guibg=#202020 guifg=#d0d0d0 gui=none

@@ -3,7 +3,6 @@
 " Maintainer: W.S. Chao <yen3rc@gmail.com>
 " The color scheme inherit yzlin256.vim, Y.Z Lin <yzlin1985@gmail.com>
 
-set background=dark
 hi clear
 if exists("syntax_on")
    syntax reset
@@ -104,7 +103,7 @@ if has("gui_running")
         hi MatchParen   gui=NONE      guifg=#404040   guibg=#8fff8b
     endif
 else
-    hi Normal           cterm=NONE      ctermfg=231     ctermbg=232
+   " hi Normal           cterm=NONE      ctermfg=231     ctermbg=231
     
     hi IncSearch        cterm=BOLD      ctermfg=232     ctermbg=215
     hi Search           cterm=NONE      ctermfg=232     ctermbg=215
