@@ -1,0 +1,9 @@
+1. go to download Vundle : https://github.com/VundleVim/Vundle.vim
+   Tutorial : http://blogger.gtwang.org/2014/04/vundle-vim-bundle-plugin-manager.html
+
+2. $: vim
+   $: PluginInstall  "install all pligin
+
+   If use the plugin "YouCompleteMe"
+   You need to see the YouCompleteMe guild for compile it.
+
