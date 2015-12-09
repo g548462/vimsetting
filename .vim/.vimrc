@@ -1,6 +1,27 @@
-""" Pathogen Plugin
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
+
+" For better bundle
+Bundle 'gmarik/vundle'
+" Great tool for auto-completion of variables and functions
+Bundle 'Valloric/YouCompleteMe'
+" Fuzzy Search of files in repository|file directory. Super handy!!
+Bundle 'kien/ctrlp.vim'
+" Pretty status bar
+Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
+Bundle 'majutsushi/tagbar'
+Bundle 'mileszs/ack.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " Enable filetype-specific plugins
+
+
 
 if has("gui_running")   " GUI color and font settings
     set guifont=Monaco:h18
@@ -25,9 +46,6 @@ set nocompatible        " not compatible with the old-fashion vi mode
 set ruler               " show the cursor position all the time
 set autoread            " auto read when file is changed from outside
 
-filetype on           " Enable filetype detection
-filetype plugin on    " Enable filetype-specific plugins
-filetype indent on    " Enable filetype-specific indenting
 set ofu=syntaxcomplete#Complete
 
 """ set encoding to UTF-8
