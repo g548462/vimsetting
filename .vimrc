@@ -19,6 +19,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Bundle 'kevinw/pyflakes-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,12 +32,14 @@ if has("gui_running")   " GUI color and font settings
     set background=dark 
     set t_Co=256          " 256 color mode
     set cursorline        " highlight current line
-    colors yen3
+    colors solarized
     highlight SpellBad term=underline gui=undercurl guisp=Orange 
 else
     set t_Co=256
+    set background=dark
     color yen3
 endif
+
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -183,13 +186,6 @@ let g:tagbar_width = 30
 """ NERDTree plugin setting
 let NERDTreeWinSize = 20
 
-""" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.ycm_extra_conf.py"
-
-
-"syntax match English /[!-~]/ contains=@spell
-"syntax match Normal /[^!-~]/ contains=@nospell
-
 
 "AutoComplPop
 " Disable AutoComplPop.
@@ -262,3 +258,9 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+" set temp ctags source
+"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/video54/apps/wsgclient/tags
+set tags=/home/g548462/Ruckus/simulator/wsgclient-sim-3.4/tags
+"set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/video54/tags
