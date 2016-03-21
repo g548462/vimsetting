@@ -19,7 +19,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Bundle 'kevinw/pyflakes-vim'
+Bundle 'brookhong/cscope.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -89,9 +89,11 @@ highlight User5 ctermfg=87
 highlight User6 ctermfg=254
 
 """ set folding
-"set foldnestmax=3
-"set foldmethod=syntax
-"set foldcolumn=4
+set foldnestmax=3
+set foldmethod=marker
+set foldmarker={{{,}}}
+set foldlevel=0 " 預設全部關閉
+set foldcolumn=4
 
 """ Set editing Tab
 set autoindent
@@ -261,6 +263,6 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 " set temp ctags source
+"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/scg/data_plane/linux_apps/tags
 "set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/video54/apps/wsgclient/tags
-set tags=/home/g548462/Ruckus/simulator/wsgclient-sim-3.4/tags
-"set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/video54/tags
+set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/tags
