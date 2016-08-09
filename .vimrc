@@ -19,7 +19,10 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Bundle 'kevinw/pyflakes-vim'
 Bundle 'brookhong/cscope.vim'
+"Bundle 'steffanc/cscopemaps'
+Bundle 'rhysd/vim-clang-format'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -51,6 +54,7 @@ set number
 set nocompatible        " not compatible with the old-fashion vi mode
 set ruler               " show the cursor position all the time
 set autoread            " auto read when file is changed from outside
+au CursorHold * checktime
 
 set ofu=syntaxcomplete#Complete
 
@@ -98,9 +102,9 @@ set foldcolumn=4
 """ Set editing Tab
 set autoindent
 set expandtab
-set shiftwidth=2
+set shiftwidth=4
 set softtabstop=4
-set tabstop=2
+set tabstop=4
 set smarttab            " insert tabs on the start of a line according to context
 set backspace=indent,eol,start 
 set copyindent         " copy the previous indentation on autoindenting
@@ -130,6 +134,9 @@ nmap <LEADER>tm :tabmove<SPACE>
 nmap <LEADER>tk :tabclose<CR>
 nmap <C-H> :tabprev<CR>
 nmap <C-L> :tabnext<CR>
+
+let g:clang_format#detect_style_file = 1
+autocmd FileType c ClangFormatAutoEnable
 
 autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
 function! SwitchLastUsedTab()
@@ -261,8 +268,10 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-
 " set temp ctags source
-"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/scg/data_plane/linux_apps/tags
+"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/wsgclient-sim-v3.4/tags
 "set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/video54/apps/wsgclient/tags
-set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/tags
+"set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/tags
+"set tags =/home/g548462/Ruckus/simulator/madSZ/tags
+"set tags =/home/g548462/Ruckus/simulator/wsgclient-sim-3.4/tags
+set tags =/home/g548462/Ruckus/simulator/wsgclient-sim-3.5/tags
