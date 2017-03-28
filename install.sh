@@ -5,4 +5,5 @@ cp -r .vim/indent ~/.vim/indent
 cp -r .vim/syntax ~/.vim/syntax
 cp .vimrc ~/.vimrc
 vim +PluginInstall +qall
-
+rm ~/.vim/bundle/cscope.vim/plugin/*
+cp cscope_maps.vim ~/.vim/bundle/cscope.vim/plugin/cscope_maps.vim

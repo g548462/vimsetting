@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 " Fuzzy Search of files in repository|file directory. Super handy!!
 Bundle 'kien/ctrlp.vim'
 " Pretty status bar
@@ -18,10 +19,8 @@ Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'mileszs/ack.vim'
-Plugin 'octol/vim-cpp-enhanced-highlight'
 Bundle 'kevinw/pyflakes-vim'
 Bundle 'brookhong/cscope.vim'
-"Bundle 'steffanc/cscopemaps'
 Bundle 'rhysd/vim-clang-format'
 
 " All of your Plugins must be added before the following line
@@ -103,7 +102,7 @@ set foldcolumn=4
 set autoindent
 set expandtab
 set shiftwidth=4
-set softtabstop=4
+set softtabstop=8
 set tabstop=4
 set smarttab            " insert tabs on the start of a line according to context
 set backspace=indent,eol,start 
@@ -123,7 +122,6 @@ set tm=500
 """ Key Mapping
 nmap <LEADER>nt :NERDTree<CR>
 nmap <LEADER>tt :TagbarToggle<CR>
-nmap <silent><F4> :SrcExplToggle<CR>
 nmap <silent><F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q && cscope -bR<CR>
 nmap <silent><F7> :set foldmethod=syntax<CR>
 
@@ -135,8 +133,12 @@ nmap <LEADER>tk :tabclose<CR>
 nmap <C-H> :tabprev<CR>
 nmap <C-L> :tabnext<CR>
 
+
 let g:clang_format#detect_style_file = 1
-autocmd FileType c ClangFormatAutoEnable
+"autocmd FileType c ClangFormatAutoEnable
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
 function! SwitchLastUsedTab()
@@ -160,10 +162,20 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm'\"")|e
 """ Auto remove each line-end space 
 autocmd FileType c,cpp,java,php,perl,python,ruby,sh,v,tex autocmd BufWritePre  :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
+" auto load cscope
+function! LoadCscope()
+  let db = findfile("cscope.out", ".;")
+  if (!empty(db))
+    let path = strpart(db, 0, match(db, "/cscope.out$"))
+    set nocscopeverbose " suppress 'duplicate connection' error
+    exe "cs add " . db . " " . path
+    set cscopeverbose
+  endif
+endfunction
+au BufEnter /* call LoadCscope()
+
 
 nmap <leader>g :Ack<CR>
-
-
 nmap <leader>m :make -j4<cr>
 nmap <leader>, :make clean<cr>
 nmap <leader>q :SQFix<cr>
@@ -190,7 +202,7 @@ fu! QFixToggle(forced)
 
 """ Tagbar plugin setting
 let g:tagbar_ctags_bin = 'ctags'
-let g:tagbar_width = 30
+let g:tagbar_width = 40
 
 """ NERDTree plugin setting
 let NERDTreeWinSize = 20
@@ -236,18 +248,6 @@ endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -260,18 +260,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " set temp ctags source
-"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/wsgclient-sim-v3.4/tags
-"set tags=/home/g548462/Ruckus/rks-3.4/ML_3.4/video54/apps/wsgclient/tags
-"set tags =/home/g548462/Ruckus/rks-3.5/scg35_UI/tags
 "set tags =/home/g548462/Ruckus/simulator/madSZ/tags
-"set tags =/home/g548462/Ruckus/simulator/wsgclient-sim-3.4/tags
-set tags =/home/g548462/Ruckus/simulator/wsgclient-sim-3.5/tags
