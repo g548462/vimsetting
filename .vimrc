@@ -22,6 +22,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'kevinw/pyflakes-vim'
 Bundle 'brookhong/cscope.vim'
 Bundle 'rhysd/vim-clang-format'
+Bundle 'mihais/vim-mark'
+Bundle 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,11 +33,11 @@ filetype plugin indent on    " Enable filetype-specific plugins
 
 if has("gui_running")   " GUI color and font settings
     set guifont=Monaco:h18
-    set background=dark 
+    set background=dark
     set t_Co=256          " 256 color mode
     set cursorline        " highlight current line
     colors solarized
-    highlight SpellBad term=underline gui=undercurl guisp=Orange 
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
 else
     set t_Co=256
     set background=dark
@@ -47,7 +49,7 @@ endif
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 set ttyfast
-syntax enable 
+syntax enable
 set number
 
 set nocompatible        " not compatible with the old-fashion vi mode
@@ -70,6 +72,7 @@ set cursorline         " Show Cursor Line in Underline
 "set showtabline=2
 set wildmenu " Show autocomplete menus.
 set visualbell
+set tabpagemax=30
 
 """ Search Setting
 set showcmd
@@ -105,7 +108,7 @@ set shiftwidth=4
 set softtabstop=8
 set tabstop=4
 set smarttab            " insert tabs on the start of a line according to context
-set backspace=indent,eol,start 
+set backspace=indent,eol,start
 set copyindent         " copy the previous indentation on autoindenting
 
 " disable sound on errors
@@ -116,7 +119,7 @@ set tm=500
 
 
 """ set help doc
-"helptags $HOME/.vim/doc 
+"helptags $HOME/.vim/doc
 
 
 """ Key Mapping
@@ -141,6 +144,8 @@ autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 autocmd TabLeave * let g:LastUsedTabPage = tabpagenr()
+autocmd BufWritePre * %s/\s\+$//e
+
 function! SwitchLastUsedTab()
     if exists("g:LastUsedTabPage")
         execute "tabnext " g:LastUsedTabPage
@@ -159,7 +164,7 @@ vmap <s-tab> <gv
 set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm'\"")|else|exe "norm $"|endif|endif
 
-""" Auto remove each line-end space 
+""" Auto remove each line-end space
 autocmd FileType c,cpp,java,php,perl,python,ruby,sh,v,tex autocmd BufWritePre  :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " auto load cscope
@@ -176,12 +181,10 @@ au BufEnter /* call LoadCscope()
 
 
 nmap <leader>g :Ack<CR>
-nmap <leader>m :make -j4<cr>
-nmap <leader>, :make clean<cr>
 nmap <leader>q :SQFix<cr>
 
 " open the error console
-nmap <leader>cc :botright cope<CR> 
+nmap <leader>cc :botright cope<CR>
 "move to next error
 nmap <leader>] :cn<CR>
 " move to the prev error
@@ -265,5 +268,7 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+" Disable syntax conceal
+let g:vim_json_syntax_conceal = 0
 " set temp ctags source
-"set tags =/home/g548462/Ruckus/simulator/madSZ/tags
+set tags =/home/g548462/Ruckus/simulator/madSZ-branches/madSZ-5.0/tags
